@@ -18,8 +18,8 @@ class CustomDialog(tk.Toplevel):
     def on_ok(self, event=None):
         self.destroy()
 		
-    def show(self):
-        self.wm_deiconify()
+    def show(self, parent):
+        parent.withdraw()
         self.entry.focus_force()
         self.wait_window()
         return self.var.get()
@@ -29,9 +29,10 @@ class Example(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         info = 'britt'
-        self.svar = CustomDialog(self, "Svar").show()
+        self.svar = CustomDialog(self, "Svar").show(parent)
 
 if __name__ == "__main__":
+    root = tk.Tk()
     test246 = ''
-    e = Example(test246)
+    e = Example(root)
     print(e.svar)
